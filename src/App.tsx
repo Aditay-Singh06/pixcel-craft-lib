@@ -1,10 +1,12 @@
 
-import WMI from "../usage/WMI"
+// import WMI from "../usage/WMI"
+// import ImageCompression from "../components/Compression"
+import CompressionImage from "../usage/CompressionImage"
 
 const App = () => {
   return (
     <div>
-     <WMI/>
+     <CompressionImage/>
     </div>
   )
 }
