@@ -1,15 +1,12 @@
-
-import ImageCompressor from '../components/Compression'
+import ImageCompressor from "../components/Compression"
 
 const CompressionImage = () => {
   return (
     <ImageCompressor
-  imagePath="/assets/aditya.jpg"
-  targetSize={1}
-  unit="MB"
-/>
-
-  
+    imageUrl="https://example.com/large-image.jpg"
+    targetSize={300}
+    unit="KB"
+  />
   )
 }
 
