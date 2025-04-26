@@ -12,7 +12,7 @@ interface ImageEditorProps {
   rotate?: number;
   flipHorizontal?: boolean;
   flipVertical?: boolean;
-  colorOverlay?: string; // e.g., "#ff000066"
+  colorOverlay?: string; // HEX with alpha, e.g., "#00000055"
   crop?: Crop;
   width?: number;
   height?: number;
@@ -23,7 +23,7 @@ const ImageEditor: React.FC<ImageEditorProps> = ({
   rotate = 0,
   flipHorizontal = false,
   flipVertical = false,
-  colorOverlay = '',
+  colorOverlay,
   crop = { x: 0, y: 0, width: 300, height: 300 },
   width = 300,
   height = 300,
@@ -37,17 +37,33 @@ const ImageEditor: React.FC<ImageEditorProps> = ({
   const imageType = src.split('.').pop()?.toUpperCase() || 'Unknown';
 
   return (
-    <div style={{ position: 'relative', width, height, overflow: 'hidden', border: '1px solid #ccc' }}>
+    <div
+      style={{
+        width: crop.width,
+        height: crop.height,
+        overflow: 'hidden',
+        position: 'relative',
+        border: '1px solid #ddd',
+        display: 'inline-block',
+      }}
+    >
       <div
         style={{
           transform,
           position: 'absolute',
-          left: -crop.x,
           top: -crop.y,
+          left: -crop.x,
         }}
       >
-        <img src={src} width={width} height={height} alt="Edited Preview" />
+        <img
+          src={src}
+          alt="Edited"
+          width={width}
+          height={height}
+          style={{ display: 'block' }}
+        />
       </div>
+
       {colorOverlay && (
         <div
           style={{
@@ -55,26 +71,27 @@ const ImageEditor: React.FC<ImageEditorProps> = ({
             position: 'absolute',
             top: 0,
             left: 0,
-            width,
-            height,
+            width: crop.width,
+            height: crop.height,
             pointerEvents: 'none',
           }}
         />
       )}
-      <span
+
+      <div
         style={{
           position: 'absolute',
-          bottom: 4,
-          right: 6,
-          background: 'rgba(0, 0, 0, 0.4)',
-          color: '#fff',
+          bottom: 5,
+          right: 5,
+          background: 'rgba(0,0,0,0.5)',
+          color: 'white',
           fontSize: 12,
           padding: '2px 6px',
           borderRadius: 4,
         }}
       >
         {imageType} Format
-      </span>
+      </div>
     </div>
   );
 };
